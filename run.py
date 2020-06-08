@@ -4,7 +4,9 @@ import textstat
 
 if __name__ == "__main__":
 
-    '''# Readability Text Stats for Writers, Journalists and Teachers'''
+    st.title("TextStat Online")
+
+    '''## Readability Text Stats for Writers, Journalists and Teachers'''
     '''This tool will help you asses the readability of a paragraph of text according to various measures.'''
 
     sankey="""The quick brown fox jumped over lazy dog"""
@@ -15,7 +17,18 @@ if __name__ == "__main__":
 
 
     if sankey != test_data:
-        st.write("# Consensus Score is %s" % textstat.text_standard(test_data, float_output=True))
+        cscore = textstat.text_standard(test_data, float_output=True)
+        if cscore > 15:
+            st.warning("## Consensus Score is %s, This requires advanced comprehension" % cscore)
+        elif cscore > 10:
+            st.info("## Consensus score is %s, This requires educated adult comprehension" % cscore)
+        elif cscore > 7:
+            st.info("## Consensus score is %s, This requires high school level comprehension" % cscore)
+        else:
+            st.info("## Consensus score is %s, This could be read by a primary school student" % cscore)
+    else:
+        st.info("## Your result will appear here when you have pasted and submitted your text above.")
+
 
     "## The Flesch Reading Ease formula"
     """Returns the Flesch Reading Ease Score.
